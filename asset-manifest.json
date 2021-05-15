@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/QuoraForCollege/static/css/main.29ff5c4e.chunk.css",
+    "main.js": "/QuoraForCollege/static/js/main.5bccd356.chunk.js",
+    "main.js.map": "/QuoraForCollege/static/js/main.5bccd356.chunk.js.map",
+    "runtime-main.js": "/QuoraForCollege/static/js/runtime-main.e1527afd.js",
+    "runtime-main.js.map": "/QuoraForCollege/static/js/runtime-main.e1527afd.js.map",
+    "static/js/2.5de02b36.chunk.js": "/QuoraForCollege/static/js/2.5de02b36.chunk.js",
+    "static/js/2.5de02b36.chunk.js.map": "/QuoraForCollege/static/js/2.5de02b36.chunk.js.map",
+    "index.html": "/QuoraForCollege/index.html",
+    "static/css/main.29ff5c4e.chunk.css.map": "/QuoraForCollege/static/css/main.29ff5c4e.chunk.css.map",
+    "static/js/2.5de02b36.chunk.js.LICENSE.txt": "/QuoraForCollege/static/js/2.5de02b36.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e1527afd.js",
+    "static/js/2.5de02b36.chunk.js",
+    "static/css/main.29ff5c4e.chunk.css",
+    "static/js/main.5bccd356.chunk.js"
+  ]
+}
