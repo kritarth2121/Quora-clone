@@ -2,7 +2,7 @@
   "name": "quora-clone",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://kritarth2121.github.io/QuoraForCollege",
+  //"homepage": "http://kritarth2121.github.io/QuoraForCollege",
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
@@ -20,8 +20,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    //"predeploy": "npm run build",
+    //"deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
