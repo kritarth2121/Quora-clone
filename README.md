@@ -1,5 +1,4 @@
-Full Stack Project 2:(Quora For College)
-
+Deployed at kritarth-quora.netlify.app
 This is the Quora Clone where different users can log in and can ask different questions.And also can answer various pre-existing questions.
 
 
