@@ -3,13 +3,6 @@ Full Stack Project 2:(Quora For College)
 This is the Quora Clone where different users can log in and can ask different questions.And also can answer various pre-existing questions.
 
 
-Contibutors:
-1.Tushar Saxena
-2.Divyanshi Bansal
-3.Janvi Pangoriya
-4.Siddhant Gupta
-
-Live on : https://tusharsaxena3112.github.io/QuoraForCollege/
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
