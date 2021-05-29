@@ -1,19 +1,21 @@
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 import firebase from "firebase";
 const firebaseConfig = {
-  apiKey: "AIzaSyDM11HhaSZDM1Hk3gdetYgN0Jkzq5x_3q0",
-  authDomain: "quora-for-college-24095.firebaseapp.com",
-  projectId: "quora-for-college-24095",
-  storageBucket: "quora-for-college-24095.appspot.com",
-  messagingSenderId: "1094611885495",
-  appId: "1:1094611885495:web:02d7d19d8b36ea30421c32",
-  measurementId: "G-5NWJR7312T",
+  apiKey: "AIzaSyCI6hU1QoIwqPmaURWPEd4tnznXVY-e9dU",
+  authDomain: "quoraclone-d9002.firebaseapp.com",
+  projectId: "quoraclone-d9002",
+  storageBucket: "quoraclone-d9002.appspot.com",
+  messagingSenderId: "722018230631",
+  appId: "1:722018230631:web:69db746343df36967a4fc2",
+  measurementId: "G-VV9GLJFN31"
 };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const provider = new firebase.auth.GoogleAuthProvider();
+const pr = new firebase.auth.FacebookAuthProvider();
+
 const db = firebaseApp.firestore();
 
-export { auth, provider };
+export { auth, provider,pr };
 export default db;
