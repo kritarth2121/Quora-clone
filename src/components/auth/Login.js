@@ -56,14 +56,7 @@ function Login() {
               />
               <p onClick={signIn}>Continue With Google</p>
             </div>
-            <div className="login__authOption">
-              <img
-                className="login__googleAuth"
-                src="https://1000logos.net/wp-content/uploads/2016/11/Facebook-logo-500x350.png"
-                alt=""
-              />
-              <span>Continue With Facebook</span>
-            </div>
+            
             <div className="login__authDesc">
               <p>
                 <span style={{ color: "blue", cursor: "pointer" }}>
