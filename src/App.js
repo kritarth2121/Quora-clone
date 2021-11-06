@@ -5,6 +5,7 @@ import Login from "./components/auth/Login";
 import Quora from "./components/Quora";
 import { login, logout, selectUser } from "./features/userSlice";
 import { auth } from "./firebase";
+import "tailwindcss/tailwind.css"
 
 const App =()=>{
   const user = useSelector(selectUser);
@@ -26,7 +27,7 @@ const App =()=>{
       console.log(authUser);
     });
   }, [dispatch]);
-  return <div className="App">{user?<Quora />:<Login/>}</div>;
+  return <div className=" App">{user?<Quora />:<Login/>}</div>;
 }
 
 export default App;

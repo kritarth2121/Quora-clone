@@ -21,7 +21,9 @@ function Feed() {
   }, []);
 
   return (
-    <div className="feed">
+    <div className=" feed">
+            <div className="bg-black h-20 w-full"></div>
+
       <QuorBox />
       {posts.map(({ id, questions }) => (
         <Post

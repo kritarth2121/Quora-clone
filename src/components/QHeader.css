@@ -187,3 +187,10 @@
   border-radius: 33px;
   cursor: pointer;
 }
+@media only screen and (max-width: 900px) {
+  .qHeader__icons{
+  display: none;}
+  .qHeader__input{
+    display: none;
+  }
+}

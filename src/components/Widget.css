@@ -10,7 +10,10 @@
   max-height: 85vh;
   background-color: white;
 }
-
+@media only screen and (max-width: 900px) {
+  .widget{
+  display: none;}
+}
 .widget__header {
   border-bottom: 1px solid lightgray;
 }
