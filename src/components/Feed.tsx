@@ -13,6 +13,7 @@ function Feed() {
             .onSnapshot((snapshot) =>
                 setPosts(
                     snapshot.docs.map((doc) => ({
+                        ...doc,
                         id: doc.id,
                         questions: doc.data(),
                     }))

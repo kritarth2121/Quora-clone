@@ -9,7 +9,7 @@ export default function QuorBox() {
 
     return (
         <div className="quoraBox">
-            <div className="quoraBox__info">
+            {/* <div className="quoraBox__info">
                 <Avatar
                     src={
                         user?.photo
@@ -19,7 +19,7 @@ export default function QuorBox() {
                     className="quoraBox__infoAvatar"
                 />
                 <h5>{user?.displayName ? user?.displayName : user?.email}</h5>
-            </div>
+            </div> */}
             <div className="quoraBox__quora">
                 <p>Write some meaninigfull and entertaining content </p>
             </div>

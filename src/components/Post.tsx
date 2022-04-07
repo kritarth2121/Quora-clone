@@ -12,13 +12,16 @@ import Modal from "react-modal";
 import db from "../firebase";
 import {selectQuestionId, setQuestionInfo} from "../reducer/questionSlice";
 import firebase from "firebase";
+import {FiEdit} from "react-icons/fi";
 
 interface Props {
     data: any;
 }
 
 const Post: React.FC<Props> = function ({data}) {
-    const {Id, question, imageUrl, timestamp, users} = data;
+    const {question, imageUrl, timestamp} = data?.questions;
+    const {id} = data;
+    console.log(data, data?.questions?.question?.user?.photo, "data");
     const user = useSelector(selectUser);
     const dispatch = useDispatch();
 
@@ -60,21 +63,33 @@ const Post: React.FC<Props> = function ({data}) {
             onClick={() =>
                 dispatch(
                     setQuestionInfo({
-                        questionId: Id,
+                        questionId: id,
                         questionName: question,
                     })
                 )
             }
         >
             <div className="post__info">
-                <Avatar />
-                <small>{new Date(timestamp?.toDate()).toLocaleString()}</small>
+                <Avatar
+                    src={
+                        data?.questions?.user?.photo ||
+                        "https://images-platform.99static.com//_QXV_u2KU7-ihGjWZVHQb5d-yVM=/238x1326:821x1909/fit-in/500x500/99designs-contests-attachments/119/119362/attachment_119362573"
+                    }
+                />
+                <small>
+                    {data?.questions?.user?.displayName || "Guest"}
+                    <br />
+                    {new Date(timestamp?.toDate()).toLocaleString()}{" "}
+                </small>
             </div>
             <div className="post__body">
                 <div className="post__question">
                     <p>{question}</p>
-                    <button onClick={() => setIsModalOpen(true)} className="post__btnAnswer">
-                        Answer
+                    <button
+                        onClick={() => setIsModalOpen(true)}
+                        className=" text-black font-semibold p-2 hover:bg-gray-500 rounded-3xl "
+                    >
+                        <FiEdit /> Answer
                     </button>
                     <Modal
                         isOpen={IsmodalOpen}
@@ -120,7 +135,7 @@ const Post: React.FC<Props> = function ({data}) {
                 <div className="post__answer">
                     {getAnswers?.map(({id, answers}) => (
                         <p key={id} style={{position: "relative", paddingBottom: "5px"}}>
-                            {Id === answers.questionId ? (
+                            {id === answers.questionId ? (
                                 <span>
                                     {answers.answer}
                                     <br />
@@ -133,7 +148,7 @@ const Post: React.FC<Props> = function ({data}) {
                                             right: "0px",
                                         }}
                                     >
-                                        <span style={{color: "#b92b27"}}>
+                                        <span className="text-black">
                                             Anonymous
                                             {new Date(answers.timestamp?.toDate()).toLocaleString()}
                                         </span>
