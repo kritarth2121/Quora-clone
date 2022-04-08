@@ -85,10 +85,12 @@ function Login() {
                                 />
                             </div>
                         </div>
-                        <div className="login__forgButt">
-                            <small>Forgot Password?</small>
+                        {/* <div className="login__forgButt">
+                            <small>Forgot Password?</small> 
                             <button onClick={handleSignIn}>Login</button>
-                        </div>
+                        </div> */}
+                        <button onClick={handleSignIn}>Login</button>
+
                         <button onClick={registerSignIn}>Register</button>
                     </div>
                 </div>

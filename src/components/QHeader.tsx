@@ -88,7 +88,7 @@ function QHeader() {
                         />
                     </LogoutBar>
                 </div>
-                <LanguageIcon />
+                {/* <LanguageIcon /> */}
                 <Button onClick={() => setIsModalOpen(true)}>Add Question</Button>
                 <Modal
                     isOpen={IsmodalOpen}

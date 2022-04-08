@@ -188,7 +188,7 @@ const Post: React.FC<Props> = function ({data}) {
                     <ImArrowDown2 />
                 </div>
 
-                <RepeatOutlinedIcon />
+                {/* <RepeatOutlinedIcon /> */}
 
                 <ChatBubbleOutlineOutlinedIcon />
                 <button
