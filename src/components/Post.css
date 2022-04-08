@@ -152,14 +152,12 @@
     height: 200px;
     padding: 5px;
     font-size: 15px;
-    color: blue;
 }
 
 .modal__button {
     display: flex;
     align-items: center;
     margin-right: -20px;
-    border-top: 1px solid lightgray;
 }
 
 .modal__button > .cancle {

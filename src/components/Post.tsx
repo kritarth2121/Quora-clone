@@ -135,6 +135,7 @@ const Post: React.FC<Props> = function ({data}) {
                         </div>
                         <div className="modal__answer">
                             <textarea
+                                className="border-2"
                                 value={answer}
                                 onChange={(e) => setAnswer(e.target.value)}
                                 placeholder="Enter Your Answer"
