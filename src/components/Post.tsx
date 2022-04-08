@@ -82,17 +82,7 @@ const Post: React.FC<Props> = function ({data}) {
         setIsModalOpen(false);
     };
     return (
-        <div
-            className="post w-full cursor-pointer"
-            onClick={() =>
-                dispatch(
-                    setQuestionInfo({
-                        questionId: id,
-                        questionName: question,
-                    })
-                )
-            }
-        >
+        <div className="post w-full cursor-pointer">
             <div className="post__info">
                 <Avatar
                     src={
@@ -106,7 +96,17 @@ const Post: React.FC<Props> = function ({data}) {
                     {new Date(timestamp?.toDate()).toLocaleString()}{" "}
                 </small>
             </div>
-            <div className="post__body break-words	 whitespace-normal w-full">
+            <div
+                className="post__body break-words	 whitespace-normal w-full"
+                onClick={() =>
+                    dispatch(
+                        setQuestionInfo({
+                            questionId: id,
+                            questionName: question,
+                        })
+                    )
+                }
+            >
                 <div className="post__question flex justify-between break-words	 whitespace-normal w-full">
                     <p className="break-words 	 whitespace-normal w-full">{question}</p>
 
