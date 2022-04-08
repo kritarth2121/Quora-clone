@@ -1,7 +1,6 @@
 import {Avatar} from "@material-ui/core";
 import React, {useEffect, useState} from "react";
 import "./Post.css";
-import ArrowUpwardOutlinedIcon from "@material-ui/icons/ArrowUpwardOutlined";
 import ArrowDownwardOutlinedIcon from "@material-ui/icons/ArrowDownwardOutlined";
 import RepeatOutlinedIcon from "@material-ui/icons/RepeatOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@material-ui/icons/ChatBubbleOutlineOutlined";
@@ -13,6 +12,7 @@ import db from "../firebase";
 import {selectQuestionId, setQuestionInfo} from "../reducer/questionSlice";
 import firebase from "firebase";
 import {FiEdit} from "react-icons/fi";
+import {ImArrowDown2, ImArrowUp2} from "react-icons/im";
 
 interface Props {
     data: any;
@@ -21,7 +21,6 @@ interface Props {
 const Post: React.FC<Props> = function ({data}) {
     const {question, imageUrl, timestamp} = data?.questions;
     const {id} = data;
-    console.log(data, data?.questions?.question?.user?.photo, "data");
     const user = useSelector(selectUser);
     const dispatch = useDispatch();
 
@@ -29,7 +28,8 @@ const Post: React.FC<Props> = function ({data}) {
     const questionId = useSelector(selectQuestionId);
     const [answer, setAnswer] = useState("");
     const [getAnswers, setGetAnswers] = useState<any[]>();
-
+    const [like, setLike] = useState<any[]>([]);
+    const [liked, setLiked] = useState(false);
     useEffect(() => {
         if (questionId) {
             db.collection("questions")
@@ -37,10 +37,34 @@ const Post: React.FC<Props> = function ({data}) {
                 .collection("answer")
                 .orderBy("timestamp", "desc")
                 .onSnapshot((snapshot) =>
-                    setGetAnswers(snapshot.docs.map((doc) => ({id: doc.id, answers: doc.data()})))
+                    setGetAnswers(snapshot.docs.map((doc) => ({...doc, id: doc.id, answers: doc.data()})))
                 );
         }
     }, [questionId]);
+
+    useEffect(() => {
+        db.collection("questions")
+            .doc(id)
+            .collection("like")
+            .onSnapshot((snapshot: any) => {
+                setLike(
+                    snapshot.docs.map((doc: any) => {
+                        if (doc.data().user.uid === user?.uid) {
+                            setLiked(true);
+                        }
+                        return {...doc.data().user};
+                    })
+                );
+            });
+    }, []);
+
+    const handleLike = () => {
+        if (!liked) {
+            db.collection("questions").doc(id).collection("like").add({
+                user: user,
+            });
+        }
+    };
 
     const handleAnswer = (e: any) => {
         e.preventDefault();
@@ -59,7 +83,7 @@ const Post: React.FC<Props> = function ({data}) {
     };
     return (
         <div
-            className="post"
+            className="post w-full cursor-pointer"
             onClick={() =>
                 dispatch(
                     setQuestionInfo({
@@ -76,21 +100,16 @@ const Post: React.FC<Props> = function ({data}) {
                         "https://images-platform.99static.com//_QXV_u2KU7-ihGjWZVHQb5d-yVM=/238x1326:821x1909/fit-in/500x500/99designs-contests-attachments/119/119362/attachment_119362573"
                     }
                 />
-                <small>
+                <small className="text-gray-700">
                     {data?.questions?.user?.displayName || "Guest"}
                     <br />
                     {new Date(timestamp?.toDate()).toLocaleString()}{" "}
                 </small>
             </div>
-            <div className="post__body">
-                <div className="post__question">
-                    <p>{question}</p>
-                    <button
-                        onClick={() => setIsModalOpen(true)}
-                        className=" text-black font-semibold p-2 hover:bg-gray-500 rounded-3xl "
-                    >
-                        <FiEdit /> Answer
-                    </button>
+            <div className="post__body break-words	 whitespace-normal w-full">
+                <div className="post__question flex justify-between break-words	 whitespace-normal w-full">
+                    <p className="break-words 	 whitespace-normal w-full">{question}</p>
+
                     <Modal
                         isOpen={IsmodalOpen}
                         onRequestClose={() => setIsModalOpen(false)}
@@ -133,10 +152,10 @@ const Post: React.FC<Props> = function ({data}) {
                     </Modal>
                 </div>
                 <div className="post__answer">
-                    {getAnswers?.map(({id, answers}) => (
-                        <p key={id} style={{position: "relative", paddingBottom: "5px"}}>
+                    {getAnswers?.map(({answers}) => (
+                        <p key={answers.id} style={{position: "relative", paddingBottom: "5px"}}>
                             {id === answers.questionId ? (
-                                <span>
+                                <span className="w-full">
                                     {answers.answer}
                                     <br />
                                     <span
@@ -148,8 +167,8 @@ const Post: React.FC<Props> = function ({data}) {
                                             right: "0px",
                                         }}
                                     >
-                                        <span className="text-black">
-                                            Anonymous
+                                        <span className="text-gray-600">
+                                            Answered By {answers.user.displayName} on{" "}
                                             {new Date(answers.timestamp?.toDate()).toLocaleString()}
                                         </span>
                                     </span>
@@ -162,14 +181,23 @@ const Post: React.FC<Props> = function ({data}) {
                 </div>
                 <img src={imageUrl} alt="" />
             </div>
-            <div className="post__footer">
-                <div className="post__footerAction">
-                    <ArrowUpwardOutlinedIcon />
-                    <ArrowDownwardOutlinedIcon />
+            <div className="post__footer ">
+                <div className="post__footerAction bg-gray-200 px-3 py-1 flex flex-row space-x-3">
+                    <ImArrowUp2 className={liked ? "text-blue-500" : ""} onClick={() => handleLike()} />
+                    {like.length}
+                    <ImArrowDown2 />
                 </div>
 
                 <RepeatOutlinedIcon />
+
                 <ChatBubbleOutlineOutlinedIcon />
+
+                <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="self-end self-content-end text-black font-semibold p-2 hover:bg-gray-300 bg-gray-100 rounded-3xl flex flex-row items-center"
+                >
+                    <FiEdit className="inline-block text-blue-500 mr-2" /> Answer
+                </button>
                 <div className="post__footerLeft">
                     <ShareOutlined />
                     <MoreHorizOutlined />

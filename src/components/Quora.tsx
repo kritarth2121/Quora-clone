@@ -7,9 +7,9 @@ import Widget from "./Widget";
 
 function Quora() {
     return (
-        <div className="quora">
+        <div className="quora ">
             <QHeader />
-            <div className="quora__content">
+            <div className="quora__content mt-3">
                 <Sidebar />
                 <Feed />
                 <Widget />

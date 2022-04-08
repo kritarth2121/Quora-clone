@@ -5,7 +5,6 @@ import Login from "./components/auth/Login";
 import Quora from "./components/Quora";
 import {login, logout, selectUser} from "./reducer/userSlice";
 import {auth} from "./firebase";
-import "tailwindcss/tailwind.css";
 
 const App = () => {
     const user = useSelector(selectUser);

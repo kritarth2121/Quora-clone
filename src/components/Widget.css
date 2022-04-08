@@ -1,31 +1,29 @@
 .widget {
-  flex: 0.2;
-  margin-left: 20px;
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  margin-right: 20px;
-  border: 1px solid lightgray;
-  border-radius: 5px;
-  max-height: 85vh;
-  background-color: white;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-right: 20px;
+    border-radius: 5px;
+    max-height: 85vh;
 }
 @media only screen and (max-width: 900px) {
-  .widget{
-  display: none;}
+    .widget {
+        display: none;
+    }
 }
 .widget__header {
-  border-bottom: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
 }
 
 .widget__header > h5 {
-  padding: 10px;
-  color: rgb(80, 80, 80);
-  font-size: 15px;
-  letter-spacing: 1.1px;
+    padding: 10px;
+    color: rgb(80, 80, 80);
+    font-size: 15px;
+    letter-spacing: 1.1px;
 }
 
 .widget__contents {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }

@@ -22,12 +22,10 @@ function Feed() {
     }, []);
 
     return (
-        <div className=" feed">
-            <div className="bg-black h-20 w-full"></div>
-
+        <div className=" feed md:w-8/12 w-full">
             <QuorBox />
-            {posts.map((post, key) => (
-                <Post key={key} data={post} />
+            {posts.map((post, index) => (
+                <Post key={index} data={post} />
             ))}
         </div>
     );
