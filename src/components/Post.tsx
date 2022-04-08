@@ -1,7 +1,6 @@
 import {Avatar} from "@material-ui/core";
 import React, {useEffect, useState} from "react";
 import "./Post.css";
-import ArrowDownwardOutlinedIcon from "@material-ui/icons/ArrowDownwardOutlined";
 import RepeatOutlinedIcon from "@material-ui/icons/RepeatOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@material-ui/icons/ChatBubbleOutlineOutlined";
 import {MoreHorizOutlined, ShareOutlined} from "@material-ui/icons";
@@ -13,6 +12,7 @@ import {selectQuestionId, setQuestionInfo} from "../reducer/questionSlice";
 import firebase from "firebase";
 import {FiEdit} from "react-icons/fi";
 import {ImArrowDown2, ImArrowUp2} from "react-icons/im";
+import {BiShowAlt} from "react-icons/bi";
 
 interface Props {
     data: any;
@@ -30,6 +30,9 @@ const Post: React.FC<Props> = function ({data}) {
     const [getAnswers, setGetAnswers] = useState<any[]>();
     const [like, setLike] = useState<any[]>([]);
     const [liked, setLiked] = useState(false);
+
+    const [likeUid, setLikeUid] = useState();
+
     useEffect(() => {
         if (questionId) {
             db.collection("questions")
@@ -50,8 +53,10 @@ const Post: React.FC<Props> = function ({data}) {
                 setLike(
                     snapshot.docs.map((doc: any) => {
                         if (doc.data().user.uid === user?.uid) {
+                            setLikeUid(doc.id);
                             setLiked(true);
                         }
+                        console.log(doc.id, "data");
                         return {...doc.data().user};
                     })
                 );
@@ -63,6 +68,10 @@ const Post: React.FC<Props> = function ({data}) {
             db.collection("questions").doc(id).collection("like").add({
                 user: user,
             });
+            setLiked(true);
+        } else {
+            db.collection("questions").doc(id).collection("like").doc(likeUid).delete();
+            setLiked(false);
         }
     };
 
@@ -96,17 +105,7 @@ const Post: React.FC<Props> = function ({data}) {
                     {new Date(timestamp?.toDate()).toLocaleString()}{" "}
                 </small>
             </div>
-            <div
-                className="post__body break-words	 whitespace-normal w-full"
-                onClick={() =>
-                    dispatch(
-                        setQuestionInfo({
-                            questionId: id,
-                            questionName: question,
-                        })
-                    )
-                }
-            >
+            <div className="post__body break-words	 whitespace-normal w-full">
                 <div className="post__question flex justify-between break-words	 whitespace-normal w-full">
                     <p className="break-words 	 whitespace-normal w-full">{question}</p>
 
@@ -151,6 +150,8 @@ const Post: React.FC<Props> = function ({data}) {
                         </div>
                     </Modal>
                 </div>
+                <img src={imageUrl} alt="" />
+
                 <div className="post__answer">
                     {getAnswers?.map(({answers}) => (
                         <p key={answers.id} style={{position: "relative", paddingBottom: "5px"}}>
@@ -179,10 +180,9 @@ const Post: React.FC<Props> = function ({data}) {
                         </p>
                     ))}
                 </div>
-                <img src={imageUrl} alt="" />
             </div>
-            <div className="post__footer ">
-                <div className="post__footerAction bg-gray-200 px-3 py-1 flex flex-row space-x-3">
+            <div className="post__footer flex flex-row space-x-3 ">
+                <div className="post__footerAction bg-gray-200 px-3 py-1  flex flex-row space-x-3">
                     <ImArrowUp2 className={liked ? "text-blue-500" : ""} onClick={() => handleLike()} />
                     {like.length}
                     <ImArrowDown2 />
@@ -191,17 +191,31 @@ const Post: React.FC<Props> = function ({data}) {
                 <RepeatOutlinedIcon />
 
                 <ChatBubbleOutlineOutlinedIcon />
-
+                <button
+                    onClick={() =>
+                        dispatch(
+                            setQuestionInfo({
+                                questionId: id,
+                                questionName: question,
+                            })
+                        )
+                    }
+                    className="self-end self-content-end  text-black font-semibold p-2 hover:bg-gray-300 bg-gray-100 rounded-3xl flex flex-row items-center"
+                >
+                    <BiShowAlt className="inline-block text-blue-500 mr-2" />
+                    Show All Answers
+                </button>
                 <button
                     onClick={() => setIsModalOpen(true)}
                     className="self-end self-content-end text-black font-semibold p-2 hover:bg-gray-300 bg-gray-100 rounded-3xl flex flex-row items-center"
                 >
                     <FiEdit className="inline-block text-blue-500 mr-2" /> Answer
                 </button>
-                <div className="post__footerLeft">
+
+                {/* <div className="post__footerLeft">
                     <ShareOutlined />
                     <MoreHorizOutlined />
-                </div>
+                </div> */}
             </div>
         </div>
     );

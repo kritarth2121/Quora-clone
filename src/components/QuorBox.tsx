@@ -21,7 +21,7 @@ export default function QuorBox() {
                 <h5>{user?.displayName ? user?.displayName : user?.email}</h5>
             </div> */}
             <div className="quoraBox__quora">
-                <p>Write some meaninigfull and entertaining content </p>
+                <p>Write some meaningfull and entertaining content </p>
             </div>
         </div>
     );

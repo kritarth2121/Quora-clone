@@ -15,6 +15,7 @@ import {selectUser} from "../reducer/userSlice";
 import db, {auth} from "../firebase";
 import {ExpandMore, Link} from "@material-ui/icons";
 import firebase from "firebase";
+import LogoutBar from "./auth/LogoutBar";
 
 Modal.setAppElement("#root");
 
@@ -74,15 +75,17 @@ function QHeader() {
             </div>
             <div className="qHeader__Rem">
                 <div className="qHeader__avatar">
-                    <Avatar
-                        onClick={() => auth.signOut()}
-                        className="Avatar"
-                        src={
-                            user && user.photo
-                                ? user?.photo
-                                : "https://images-platform.99static.com//_QXV_u2KU7-ihGjWZVHQb5d-yVM=/238x1326:821x1909/fit-in/500x500/99designs-contests-attachments/119/119362/attachment_119362573"
-                        }
-                    />
+                    <LogoutBar logout={() => auth.signOut()}>
+                        <Avatar
+                            // onClick={() => auth.signOut()}
+                            className="Avatar"
+                            src={
+                                user && user.photo
+                                    ? user?.photo
+                                    : "https://images-platform.99static.com//_QXV_u2KU7-ihGjWZVHQb5d-yVM=/238x1326:821x1909/fit-in/500x500/99designs-contests-attachments/119/119362/attachment_119362573"
+                            }
+                        />
+                    </LogoutBar>
                 </div>
                 <LanguageIcon />
                 <Button onClick={() => setIsModalOpen(true)}>Add Question</Button>
@@ -123,31 +126,35 @@ function QHeader() {
                             <ExpandMore />
                         </div>
                     </div>
-                    <div className="modal__Field">
-                        <Input
-                            value={input}
-                            onChange={(e) => setInput(e.target.value)}
-                            type="text"
-                            placeholder="Start your question with 'What', 'How', 'Why', etc. "
-                        />
-                        <div className="modal__fieldLink">
-                            <Link />
-                            <input
-                                value={inputUrl}
-                                onChange={(e) => setInputUrl(e.target.value)}
-                                type="text"
-                                placeholder="Optional: inclue a link that gives context"
-                            ></input>
+                    <form onSubmit={(e) => handleQuestion(e)}>
+                        <div className="modal__Field">
+                            <textarea
+                                className="border-2"
+                                rows={7}
+                                required
+                                value={input}
+                                onChange={(e) => setInput(e.target.value)}
+                                placeholder="Start your question with 'What', 'How', 'Why', etc. "
+                            />
+                            <div className="modal__fieldLink">
+                                <Link />
+                                <input
+                                    value={inputUrl}
+                                    onChange={(e) => setInputUrl(e.target.value)}
+                                    type="text"
+                                    placeholder="Optional: inclue a link that gives context"
+                                ></input>
+                            </div>
                         </div>
-                    </div>
-                    <div className="modal__buttons">
-                        <button className="cancle" onClick={() => setIsModalOpen(false)}>
-                            Cancel
-                        </button>
-                        <button type="submit" onClick={handleQuestion} className="add">
-                            Add Question
-                        </button>
-                    </div>
+                        <div className="modal__buttons">
+                            <button className="cancle" onClick={() => setIsModalOpen(false)}>
+                                Cancel
+                            </button>
+                            <button type="submit" className="add">
+                                Add Question
+                            </button>
+                        </div>
+                    </form>
                 </Modal>
             </div>
         </div>
