@@ -16,6 +16,7 @@ import db, {auth} from "../firebase";
 import {ExpandMore, Link} from "@material-ui/icons";
 import firebase from "firebase";
 import LogoutBar from "./auth/LogoutBar";
+import DarkMode from "./DarkMode";
 
 Modal.setAppElement("#root");
 
@@ -52,7 +53,7 @@ function QHeader() {
                     alt=""
                 />
             </div>
-            <div className="qHeader__icons">
+            {/* <div className="qHeader__icons">
                 <div className="active qHeader__icon">
                     <HomeIcon />
                 </div>
@@ -68,7 +69,7 @@ function QHeader() {
                 <div className="qHeader__icon">
                     <NotificationsOutlinedIcon />
                 </div>
-            </div>
+            </div> */}
             <div className="qHeader__input">
                 <SearchIcon />
                 <input type="text" placeholder="Search Quora" />
@@ -156,6 +157,7 @@ function QHeader() {
                         </div>
                     </form>
                 </Modal>
+                <DarkMode />
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 import React from "react";
 import {Menu, Transition} from "@headlessui/react";
-import {Fragment, useEffect, useRef, useState} from "react";
-import DarkMode from "../DarkMode";
+import {Fragment} from "react";
+import {AiOutlineLogout} from "react-icons/ai";
 
 interface Props {
     children: any;
@@ -26,7 +26,7 @@ const LogoutBar: React.FC<Props> = function (props) {
                 leaveTo="transform opacity-0 scale-95"
             >
                 <Menu.Items className="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    <div className="px-1 py-1 ">
+                    {/* <div className="px-1 py-1 ">
                         <Menu.Item>
                             {({active}) => (
                                 <button
@@ -49,7 +49,7 @@ const LogoutBar: React.FC<Props> = function (props) {
                                 </button>
                             )}
                         </Menu.Item>
-                    </div>
+                    </div> 
                     <div className="px-1 py-1">
                         <Menu.Item>
                             {({active}) => (
@@ -73,7 +73,7 @@ const LogoutBar: React.FC<Props> = function (props) {
                                 </button>
                             )}
                         </Menu.Item>
-                    </div>
+                    </div>*/}
                     <div className="px-1 py-1">
                         <Menu.Item>
                             {({active}) => (
@@ -83,7 +83,7 @@ const LogoutBar: React.FC<Props> = function (props) {
                                         active ? "bg-gray-200 " : "text-gray-900"
                                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
                                 >
-                                    Logout
+                                    <AiOutlineLogout className=" font-black text-xl mr-2" /> Logout
                                 </button>
                             )}
                         </Menu.Item>

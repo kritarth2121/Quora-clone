@@ -30,7 +30,7 @@ const toggleTheme: ChangeEventHandler<HTMLInputElement> = (e) => {
 
 const DarkMode = () => {
     return (
-        <div className="toggle-theme-wrapper">
+        <div className="toggle-theme-wrapper ml-5">
             <span>☀️</span>
             <label className="toggle-theme" htmlFor="checkbox">
                 <input type="checkbox" id="checkbox" onChange={toggleTheme} defaultChecked={defaultDark} />
