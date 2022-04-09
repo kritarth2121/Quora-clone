@@ -1,15 +1,8 @@
 import React, {useState} from "react";
-import HomeIcon from "@material-ui/icons/Home";
-import FeaturedPlayListOutlinedIcon from "@material-ui/icons/FeaturedPlayListOutlined";
-import AssignmentTurnedInOutlinedIcon from "@material-ui/icons/AssignmentTurnedInOutlined";
-import PeopleAltOutlinedIcon from "@material-ui/icons/PeopleAltOutlined";
-import NotificationsOutlinedIcon from "@material-ui/icons/NotificationsOutlined";
 import SearchIcon from "@material-ui/icons/Search";
-import LanguageIcon from "@material-ui/icons/Language";
 import Modal from "react-modal";
-
 import "./QHeader.css";
-import {Avatar, Button, Input} from "@material-ui/core";
+import {Avatar, Button} from "@material-ui/core";
 import {useSelector} from "react-redux";
 import {selectUser} from "../reducer/userSlice";
 import db, {auth} from "../firebase";
@@ -26,6 +19,7 @@ function QHeader() {
     const [IsmodalOpen, setIsModalOpen] = useState(false);
     const [input, setInput] = useState("");
     const [inputUrl, setInputUrl] = useState("");
+
     const questionName = input;
 
     const handleQuestion = (e: any) => {
